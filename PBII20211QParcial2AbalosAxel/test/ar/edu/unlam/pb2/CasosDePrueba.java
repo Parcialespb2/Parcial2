@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class CasosDePrueba {
+public class CasosDePrueba { 
 
 	@Test
 	public void queSePuedaInstanciarUnComestible() {
@@ -15,7 +15,7 @@ public class CasosDePrueba {
 		assertEquals("31/01/2022", producto.getFechaDeVencimiento());
 		assertEquals("Arcor", ((Galletitas)producto).getMarca());
 	}
-	
+	 
 	@Test
 	public void queSePuedaInstanciarOtroComestible() {
 		Comestible producto = new Carne(2, "Tapa de nalga", "07/07/2021", "15/07/2021", 2.0, "La Estancia", 600.0);
@@ -57,7 +57,7 @@ public class CasosDePrueba {
 	
 	@Test
 	public void queSePuedaInstanciarOtraIndumentaria() {
-		Indumentaria producto = new Zapatilla(6, "De running", 42, "Nike", "Blancas", 5000.0);
+		Indumentaria producto = new Zapatilla(6, "De running", "42", "Nike", "Blancas", 5000.0);
 		
 		assertEquals("De running", ((Zapatilla)producto).getDescripcion());
 		assertEquals("42", producto.getTalle());
@@ -75,8 +75,8 @@ public class CasosDePrueba {
 		vital.ingresarProducto(new Televisor(3, "Serie Dorada", 42, 12, "Samsung", 200000.0));
 		vital.ingresarProducto(new Heladera(4, "Nuevo Modelo", true, 12, "Samsung", 150000.0));
 		vital.ingresarProducto(new Remera(5, "Básica", "XL", "Lacoste", "Azul", 2000.0));
-		vital.ingresarProducto(new Zapatilla(6, "De running", 42, "Nike", "Blancas", 5000.0));
-		vital.ingresarProducto(new Zapatilla(7, "Diarias", 45, "Topper", "Blancas", 2500.0));
+		vital.ingresarProducto(new Zapatilla(6, "De running", "42", "Nike", "Blancas", 5000.0));
+		vital.ingresarProducto(new Zapatilla(7, "Diarias", "45", "Topper", "Blancas", 2500.0));
 		vital.ingresarProducto(new Televisor(8, "3D", 75, 12, "LG", 500000.0));
 		vital.ingresarProducto(new Remera(9, "Básica", "L", "Lacoste", "Azul", 2000.0));
 		vital.ingresarProducto(new Remera(9, "Básica", "M", "Lacoste", "Roja", 2000.0));
@@ -88,7 +88,7 @@ public class CasosDePrueba {
 		assertEquals((Integer)1, vital.getStock(2));
 		assertEquals((Integer)3, vital.getStock(9));
 	}
-	
+
 	@Test
 	public void queSePuedaGenerarUnaVenta() {
 		
@@ -103,8 +103,8 @@ public class CasosDePrueba {
 		vital.ingresarProducto(new Televisor(3, "Serie Dorada", 42, 12, "Samsung", 200000.0));
 		vital.ingresarProducto(new Heladera(4, "Nuevo Modelo", true, 12, "Samsung", 150000.0));
 		vital.ingresarProducto(new Remera(5, "Básica", "XL", "Lacoste", "Azul", 2000.0));
-		vital.ingresarProducto(new Zapatilla(6, "De running", 42, "Nike", "Blancas", 5000.0));
-		vital.ingresarProducto(new Zapatilla(7, "Diarias", 45, "Topper", "Blancas", 2500.0));
+		vital.ingresarProducto(new Zapatilla(6, "De running", "42", "Nike", "Blancas", 5000.0));
+		vital.ingresarProducto(new Zapatilla(7, "Diarias", "45", "Topper", "Blancas", 2500.0));
 		vital.ingresarProducto(new Televisor(8, "3D", 75, 12, "LG", 500000.0));
 		vital.ingresarProducto(new Remera(9, "Básica", "L", "Lacoste", "Azul", 2000.0));
 		vital.ingresarProducto(new Remera(9, "Básica", "M", "Lacoste", "Roja", 2000.0));
@@ -128,7 +128,7 @@ public class CasosDePrueba {
 		
 		assertEquals((Integer)720, vital.getVenta(numeroDeVenta).getImporte(), 0.01);
 	}
-	
+		
 	@Test (expected = ProductoInexistente.class)
 	public void queNoSePuedaVenderUnProductoInexistente() throws ProductoSinStock, ProductoInexistente {
 		Supermercado vital = new Supermercado("Vital");
@@ -179,9 +179,21 @@ public class CasosDePrueba {
 		vital.agregarAlCarrito(numeroDeVenta, 1);
 		
 	}
-	
+
 	@Test 
 	public void queSePuedanObtenerLosProductosComestibles() {
+		Supermercado vital = new Supermercado("Vital");
+		
+		vital.ingresarProducto(new Galletitas(1, "Cerealitas", "22/06/2021", "31/01/2022", "Arcor", 120.0));
+		vital.ingresarProducto(new Carne(2, "Tapa de nalga", "07/07/2021", "15/07/2021", 2.0, "La Estancia", 600.0));
+		vital.ingresarProducto(new Galletitas(3, "Oreo", "22/06/2021", "31/01/2022", "Arcor", 120.0));
+
+		vital.ingresarProducto(new Zapatilla(7, "Diarias", "45", "Topper", "Blancas", 2500.0));
+		vital.ingresarProducto(new Televisor(8, "3D", 75, 12, "LG", 500000.0));
+		vital.ingresarProducto(new Remera(9, "Básica", "L", "Lacoste", "Azul", 2000.0));
+		
+		assertEquals(3,vital.productoscomestibles().size());
+		
 		
 	}
 	
